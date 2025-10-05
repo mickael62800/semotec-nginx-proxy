@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: reverse-proxy-nginx
+    ports:
+      - "80:80"
+    networks:
+      - semorando-network
+      - semoutils-prod
+    restart: unless-stopped
+
+networks:
+  semorando-network:
+    external: true
+    name: semorando-network
+  semoutils-prod:
+    external: true
+    name: semoutils-prod-network
